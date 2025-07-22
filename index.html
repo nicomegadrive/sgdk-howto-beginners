@@ -4,10 +4,14 @@
         <meta charset="UTF-8"/>
         <meta name="robots" content="index, follow" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="/site.webmanifest">
         <style>
             body {display:flex; flex-direction: row; position: relative; gap: 16px; box-sizing: border-box; margin: 0; padding: 0 16px 0 0; overflow-x: hidden;}
             code {margin: 8px 0; background: #000; color: #fff; padding: 16px; border: 1px solid #fff; overflow: scroll;}
-            nav {position: relative; width: 20%; background: #17569B; box-shadow: 0 .5rem 1rem #00000026,inset 0 -1px #ffffff26; overflow-y: scroll; height: 100vh;}
+            nav {position: relative; width: 20%; background: #17569B; box-shadow: 0 .5rem 1rem #00000026,inset 0 -1px #ffffff26; overflow-y: scroll; height: 100vh; padding: 16px;}
             nav ul {position: sticky; top: 0; left: 0; list-style-type: none;}
             nav a {color: #fff;}
             main {width: 80%; display: flex; flex-direction: column; gap: 16px;}
@@ -15,6 +19,8 @@
             section details {display:flex; flex-direction: column;}
             pre {display: flex; flex-direction: column;}
             h1 {text-align: center;}
+            h2 {color: #fff;}
+            select {width: 100%; font-size: 16px;}
 
             @media (max-width: 767px) {
                 body {flex-direction: column; padding: 0 16px;}
@@ -25,20 +31,24 @@
     </head>
     <body>
         <nav>
-            <ul>
-                <li>
-                    <a href="#lesson_basic_file">Basic setup</a>
-                </li>
-                <li>
-                    <a href="#lesson_show_text">Show text</a>
-                </li>
-                <li>
-                    <a href="#lesson_remove_text">Remove text</a>
-                </li>
-                <li>
-                    <a href="#lesson_palette_text">Text palette</a>
-                </li>
-            </ul>
+            <h2>Navigation</h2>
+            <select id="navigation" onchange="getNavValue()">
+                <optgroup label="Basic setup">
+                    <option value="lesson_basic_file">main.c file</option>
+                </optgroup>
+                <optgroup label="Text">
+                    <option value="lesson_show_text">Show text</option>
+                    <option value="lesson_remove_text">Remove text</option>
+                    <option value="lesson_palette_text">Text palette</option>
+                </optgroup>
+            </select>
+            <script>
+                function getNavValue() {
+                    var val_navigation_click = document.getElementById("navigation").value;
+                    console.log(val_navigation_click);
+                    document.getElementById(val_navigation_click).scrollIntoView();
+                }
+            </script>
         </nav>
 
         <main>
