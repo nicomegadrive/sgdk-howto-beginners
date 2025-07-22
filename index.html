@@ -2,8 +2,133 @@
 <html>
     <head>
         <meta charset="UTF-8"/>
+        <style>
+            body {display:flex; flex-direction: row; gap: 16px;}
+            code {background: #000; color: #fff; padding: 16px; border: 1px solid #fff;}
+            nav {position: sticky; top: 0; left: 0; width: 20%;}
+            main {width: 80%; display: flex; flex-direction: column; gap: 16px;}
+            section {border: 2px solid #000; border-radius: 16px; padding: 16px;}
+            pre {display: flex; flex-direction: column;}
+        </style>
     </head>
     <body>
-        Hello World
+        <nav>
+            <ul>
+                <li>
+                    <a href="#lesson_basic_file">Basic setup</a>
+                </li>
+                <li>
+                    <a href="#lesson_show_text">Show text</a>
+                </li>
+                <li>
+                    <a href="#lesson_remove_text">Remove text</a>
+                </li>
+            </ul>
+        </nav>
+
+        <main>
+            <h1>How to code basic stuff with SGDK</h1>
+            <section id="lesson_basic_file">
+                <h2>Basic setup in the main.c file</h2>
+                <pre>
+                    <code>
+                        #include "genesis.h"
+                        #include "resources.h"
+
+                        int main()
+                        {
+                            SPR_init();
+                            while(1)
+                            {
+                                SPR_update();
+                                SYS_doVBlankProcess();
+                            }
+                            return (0);
+                        }
+                    </code>
+                </pre>
+
+            </section>
+
+            <section id="lesson_show_text">
+                <h2>Show a text</h2>
+                <code>VDP_drawText("Hello World", 11, 20);</code>
+                <ul>
+                    <li>11 is the x position on screen</li>
+                    <li>20 is the y position on screen</li>
+                </ul>
+                <p>You could also do like this :</p>
+                <pre>
+                    <code>
+                        #include "genesis.h"
+                        #include "resources.h"
+
+                        s16 text_x_coord = 11;
+                        s16 text_y_coord = 20;
+
+                        int main()
+                        {
+                            VDP_drawText("Hello World", text_x_coord, text_y_coord);
+                            SPR_init();
+                            while(1)
+                            {
+                                SPR_update();
+                                SYS_doVBlankProcess();
+                            }
+                            return (0);
+                        }
+
+                    </code>
+                </pre>
+                <p>So if you need to change its position dynamically, you can change the variable's value directly.</p>
+            </section>
+
+            <section id="lesson_remove_text">
+                <h2>Remove a text</h2>
+                <code>VDP_clearText(11, 20, 30);</code>
+                <ul>
+                    <li>11 is the x position on screen</li>
+                    <li>20 is the y position on screen</li>
+                    <li>30 is the amount of characters to remove</li>
+                </ul>
+                <p>You could also do like this :</p>
+                <pre>
+                    <code>
+                        #include "genesis.h"
+                        #include "resources.h"
+
+                        // Text x coordinate
+                        s16 text_x_coord = 11;
+                
+                        // Text y coordinate
+                        s16 text_y_coord = 20;
+
+                        // Number of characters
+                        s16 text_nbr_char = 30;
+
+                        int main()
+                        {
+                            // You see me
+                            VDP_drawText("Hello World", text_x_coord, text_y_coord);
+
+                            // You don't see me anymore
+                            VDP_clearText(text_x_coord, text_y_coord, text_nbr_char);
+
+                            SPR_init();
+
+                            while(1)
+                            {
+                                SPR_update();
+                                SYS_doVBlankProcess();
+                            }
+                            return (0);
+                        }
+
+                    </code>
+                </pre>
+            </section>
+
+        </main>
+
     </body>
 </html>
